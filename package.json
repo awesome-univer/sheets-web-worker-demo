@@ -1,0 +1,29 @@
+{
+  "name": "univer-sheets-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@univerjs/core": "*",
+    "@univerjs/design": "*",
+    "@univerjs/docs": "*",
+    "@univerjs/docs-ui": "*",
+    "@univerjs/engine-formula": "*",
+    "@univerjs/engine-numfmt": "*",
+    "@univerjs/engine-render": "*",
+    "@univerjs/rpc": "*",
+    "@univerjs/sheets": "*",
+    "@univerjs/sheets-formula": "*",
+    "@univerjs/sheets-numfmt": "*",
+    "@univerjs/sheets-ui": "*",
+    "@univerjs/ui": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  }
+}
