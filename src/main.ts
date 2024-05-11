@@ -5,7 +5,7 @@ import "@univerjs/sheets-ui/lib/index.css";
 import "@univerjs/sheets-formula/lib/index.css";
 import "@univerjs/sheets-numfmt/lib/index.css";
 
-import { LocaleType, LogLevel, Univer } from "@univerjs/core";
+import { LocaleType, LogLevel, Univer, UniverInstanceType } from "@univerjs/core";
 import { defaultTheme } from "@univerjs/design";
 import { RichTextEditingMutation, UniverDocsPlugin } from "@univerjs/docs";
 import { UniverDocsUIPlugin } from "@univerjs/docs-ui";
@@ -36,12 +36,9 @@ univer.registerPlugin(UniverRenderEnginePlugin);
 univer.registerPlugin(UniverUIPlugin, {
   container: "app",
   header: true,
-  toolbar: true,
   footer: true,
 });
-univer.registerPlugin(UniverSheetsPlugin, {
-  notExecuteFormula: true,
-});
+univer.registerPlugin(UniverSheetsPlugin);
 univer.registerPlugin(UniverSheetsUIPlugin);
 
 // sheet feature plugins
@@ -52,9 +49,11 @@ univer.registerPlugin(UniverFormulaEnginePlugin, {
 });
 univer.registerPlugin(UniverSheetsFormulaPlugin);
 univer.registerPlugin(UniverRPCMainThreadPlugin, {
-  workerURL: "./worker.js",
+  workerURL: new Worker(new URL('./worker.js', import.meta.url), {
+    type: 'module'
+  }),
   unsyncMutations: new Set([RichTextEditingMutation.id]),
 } as IUniverRPCMainThreadConfig);
 
 // create univer sheet instance
-univer.createUniverSheet(DEFAULT_WORKBOOK_DATA_DEMO);
+univer.createUnit(UniverInstanceType.UNIVER_SHEET, DEFAULT_WORKBOOK_DATA_DEMO);
